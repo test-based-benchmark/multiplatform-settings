@@ -19,6 +19,7 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.nexus.publish)
     alias(libs.plugins.kotlin.binaryCompatibilityValidator)
+    id("org.jetbrains.kotlinx.kover") version "0.8.3"
 }
 
 allprojects {
@@ -36,5 +37,15 @@ apiValidation {
     @OptIn(kotlinx.validation.ExperimentalBCVApi::class)
     klib {
         enabled = true
+    }
+}
+
+subprojects {
+    apply(plugin = "org.jetbrains.kotlinx.kover")
+}
+
+kover {
+    merge {
+        subprojects { true }
     }
 }
